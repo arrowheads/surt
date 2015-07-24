@@ -1,0 +1,11 @@
+#!/bin/sh
+
+curl -O http://www.musl-libc.org/releases/musl-1.1.10.tar.gz
+bsdtar -xf musl-1.1.10.tar.gz
+
+cd musl-1.1.10
+
+./configure --prefix=/usr --exec-prefix=/usr
+
+make -j4
+make DESTDIR=../TOTAR  install

@@ -1,0 +1,37 @@
+#!/bin/sh
+
+# Source the utils file which contains... utils.
+. ./utils
+
+# Define the environment.
+SYSROOT=/empyrean
+PKGS=/home/kori/local/surt/packages
+SRC=/home/kori/local/surt/distfiles/$1
+
+# Build the package and tarball it.
+buildPackage() {
+	work=$(mktemp -dp .)
+	cd $work
+
+	../utils
+	../recipes/$1
+
+	cd TOTAR
+	find * > $PKGS/musl.pkg
+	find * | cpio -o | xz > $PKGS/$1.txz
+}
+
+# Install the package on the system.
+addPackage() {
+	cd $SYSROOT
+
+	extract $PKGS/$1.txz
+}
+
+if [ -n ${1} ]; then
+	case ${1} in
+		"build") buildPackage $2 ;;
+		"add") addPackage $PACKAGES/$2 ;;
+		"rm") removePackage $2 ;;
+	esac
+fi
