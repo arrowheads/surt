@@ -1,0 +1,16 @@
+[source]
+source = http://www.connochaetos.org/oksh/oksh-0.5.0.tar.gz
+sha256 = wakarimasen lol
+
+[build]
+static = true
+parallel = true 
+
+[configure]
+--prefix=/usr
+--exec-prefix=/usr
+
+[package]
+version = 0.5.0
+compression = xz
+strip = false
