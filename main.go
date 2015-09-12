@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
+
+	"github.com/kori/surt/pkg"
 )
 
 func main() {
-	file, _ := ioutil.TempDir(os.TempDir(), "surt-")
-	defer os.Remove(file)
-	fmt.Println(file)
+	file := os.Args[1]
+	ay := pkg.Prepare(file)
+	fmt.Println(ay.Info.Name)
 }
