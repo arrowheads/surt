@@ -8,7 +8,12 @@ import (
 )
 
 func main() {
-	file := os.Args[1]
-	ay := pkg.Prepare(file)
-	fmt.Println(ay.Info.Name)
+	switch os.Args[1] {
+	case "build":
+		file := os.Args[2]
+		p := pkg.Prepare(file)
+		fmt.Println(p.Info.Name)
+	case "add":
+		fmt.Println("not implemented yet!")
+	}
 }

@@ -2,6 +2,6 @@ surt
 ------------
 ### Package manager
 
-usage: surt build musl
+usage: surt build <recipe>
 
-and then: surt add musl
+and then: surt add <recipe>
