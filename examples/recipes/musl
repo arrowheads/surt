@@ -2,8 +2,6 @@
 name = "musl"
 version = "1.1.10"
 dependencies = []
-compression = "xz"
-strip = false
 
 [source]
 source = "http://www.musl-libc.org/releases/musl-1.1.10.tar.gz"
@@ -20,13 +18,19 @@ sha256 = [
 ]
 
 [build]
+strip = false
 static = false 
 parallel = true 
+
+prebuild = []
+
 configure = [
 	"--prefix=usr",
 	"--exec-prefix=/usr",
 ]
-extra = [
+features = []
+
+postbuild = [
 	"install -d $PKG/usr/bin",
 	"rm $PKG/lib/ld-musl-x86_64.so.1",
 	"ln -s /opt/musl/lib/libc.so $PKG/lib/ld-musl-x86_64.so.1",

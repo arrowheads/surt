@@ -2,8 +2,6 @@
 name = "ksh"
 version = "0.5.0"
 dependencies = [ "musl" ]
-compression = "xz"
-strip = false
 
 [source]
 source = "http://www.connochaetos.org/oksh/oksh-0.5.0.tar.gz"
@@ -20,10 +18,16 @@ sha256 = [
 ]
 
 [build]
+strip = false
 static = false 
 parallel = true 
+
+prebuild = []
+
 configure = [
 	"--prefix=usr",
 	"--exec-prefix=/usr",
 ]
-extra = []
+features = [] 
+
+postbuild = []

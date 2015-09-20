@@ -4,36 +4,35 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"time"
 
 	"github.com/naoina/toml"
 )
 
 type Package struct {
+	Info struct {
+		Name         string
+		Version      string
+		Dependencies []string
+	}
 	Source struct {
 		Source  string
 		SHA256  []string
 		Patches []string
 	}
 	Build struct {
+		Strip     bool
 		Static    bool
 		Parallel  bool
+		PreBuild  []string
+		Features  [][]string
 		Configure []string
 		Extra     []string
-	}
-	Info struct {
-		Name        string
-		Version     string
-		Compression string
-		Strip       bool
+		PostBuild []string
 	}
 }
 
-func Prepare(recipe string) Package {
-	// create work dir
-	wd, err := ioutil.TempDir(os.TempDir(), "surt-")
-	check(err)
-	defer os.Remove(wd)
-
+func prepare(recipe string) Package {
 	r, err := os.Open(recipe)
 	check(err)
 
@@ -46,10 +45,21 @@ func Prepare(recipe string) Package {
 	return pkg
 }
 
-func main() {
-	file := os.Args[1]
-	ay := Prepare(file)
-	fmt.Println(ay.Info.Name)
+func Build(recipe string) {
+	p := prepare(recipe)
+	// destination file
+	df := p.Info.Name + "#" + p.Info.Version + ".pkg.tar"
+
+	// create work dir
+	wd, err := ioutil.TempDir(os.TempDir(), "surt-")
+	check(err)
+	defer os.Remove(wd)
+	fmt.Println(wd)
+	time.Sleep(10 * time.Second)
+
+	dir, err := os.Open(wd)
+	check(err)
+	defer dir.Close()
 }
 
 func check(e error) {
