@@ -76,7 +76,7 @@ func Build(recipe string) {
 	check(err)
 	defer tf.Close()
 
-	// create file writers and closers in preparation for compression
+	// create file writers and closers
 	var fw io.WriteCloser = tf
 
 	// create gzip writer, all writes here are now compressed
