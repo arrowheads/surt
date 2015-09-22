@@ -31,8 +31,8 @@ configure = [
 features = []
 
 postbuild = [
-	"install -d $PKG/usr/bin",
-	"rm $PKG/lib/ld-musl-x86_64.so.1",
-	"ln -s /opt/musl/lib/libc.so $PKG/lib/ld-musl-x86_64.so.1",
-	"ln -s /opt/musl/bin/musl-gcc $PKG/usr/bin/musl-gcc",
+	"install -d /usr/bin",
+	"rm /lib/ld-musl-x86_64.so.1",
+	"ln -s /opt/musl/lib/libc.so /lib/ld-musl-x86_64.so.1",
+	"ln -s /opt/musl/bin/musl-gcc /usr/bin/musl-gcc",
 ]

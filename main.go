@@ -13,8 +13,7 @@ func main() {
 		fmt.Println("no operation specified")
 	case "build":
 		file := os.Args[2]
-		p := pkg.Build(file)
-		fmt.Println(p.Info.Name)
+		pkg.Build(file)
 	case "add":
 		fmt.Println("not implemented yet!")
 	}
