@@ -2,6 +2,6 @@ surt
 ------------
 ### Package manager
 
-usage: surt build <recipe>
+Currently in development, does nothing yet.
 
-and then: surt add <recipe>
+Examples of how recipes should look like are in `examples`.
