@@ -11,8 +11,8 @@ import (
 	"github.com/naoina/toml"
 )
 
-type Package struct {
-	Info struct {
+type Recipe struct {
+	Meta struct {
 		Name         string
 		Version      string
 		Dependencies []string
@@ -22,36 +22,35 @@ type Package struct {
 		SHA256  []string
 		Patches []string
 	}
-	Build struct {
-		Strip     bool
-		Static    bool
-		Parallel  bool
-		Prebuild  []string
-		Features  [][]string
+	Options struct {
+		Strip    bool
+		Static   bool
+		Parallel bool
+		Features [][]string
+	}
+	Extra struct {
 		Configure []string
-		Extra     []string
+		Prebuild  []string
 		Postbuild []string
 	}
 }
 
-func prepare(recipe string) Package {
-	r, err := os.Open(recipe)
+func Prepare(file string) Recipe {
+	f, err := os.Open(file)
 	check(err)
 
-	buf, err := ioutil.ReadAll(r)
+	buf, err := ioutil.ReadAll(f)
 	check(err)
-	r.Close()
+	f.Close()
 
-	var pkg Package
-	check(toml.Unmarshal(buf, &pkg))
-	return pkg
+	var r Recipe
+	check(toml.Unmarshal(buf, &r))
+	return r
 }
 
-func Build(recipe string) {
-	// get necessary info
-	p := prepare(recipe)
+func (r *Recipe) Build() {
 	// destination file
-	df := p.Info.Name + "#" + p.Info.Version + ".pkg.tgz"
+	df := r.Meta.Name + "#" + r.Meta.Version + ".pkg.tgz"
 
 	// create work dir
 	wd, err := ioutil.TempDir(os.TempDir(), "surt-")

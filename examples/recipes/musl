@@ -1,38 +1,35 @@
-[info]
+[meta]
 name = "musl"
-version = "1.1.10"
+version = "1.1.11"
 dependencies = []
 
 [source]
-source = "http://www.musl-libc.org/releases/musl-1.1.10.tar.gz"
+source = "http://www.musl-libc.org/releases/musl-1.1.11.tar.gz"
 patches = [ 
 	"patch1.patch",
 	"patch2.patch",
 	"patch3.patch",
 ]
 sha256 = [
-	"0z4b3j1r0v4zr3v1cpl1v56zx6w8nq1y3wbs8x1zg87pqyqykfs5",
 	"fooooooooooooooooooooooooooooooooooooooooooooooooooo",
 	"baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaar",
 	"baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaz",
 ]
 
-[build]
+[options]
 strip = false
 static = false 
 parallel = true 
+features = [
+	["foo", "--enable-foo"],
+	["bar", "--enable-bar"],
+	["baz", "--enable-baz"],
+]
 
-prebuild = []
-
+[extra]
 configure = [
 	"--prefix=usr",
 	"--exec-prefix=/usr",
 ]
-features = []
-
-postbuild = [
-	"install -d /usr/bin",
-	"rm /lib/ld-musl-x86_64.so.1",
-	"ln -s /opt/musl/lib/libc.so /lib/ld-musl-x86_64.so.1",
-	"ln -s /opt/musl/bin/musl-gcc /usr/bin/musl-gcc",
-]
+prebuild = []
+postbuild = []

@@ -12,8 +12,9 @@ func main() {
 	default:
 		fmt.Println("no operation specified")
 	case "build":
-		file := os.Args[2]
-		pkg.Build(file)
+		recipe := os.Args[2]
+		r := pkg.Prepare(recipe)
+		r.Build()
 	case "add":
 		fmt.Println("not implemented yet!")
 	}
