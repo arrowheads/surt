@@ -1,33 +1,39 @@
-[info]
-name = "ksh"
-version = "0.5.0"
-dependencies = [ "musl" ]
+[meta]
+name = "foo"
+version = "13.3.7"
+dependencies = []
 
 [source]
-source = "http://www.connochaetos.org/oksh/oksh-0.5.0.tar.gz"
-patches = [ 
+download = [
+	"https://anexcellenturl.com/anexcellentprogram.tar.gz",
+]
+local = [
 	"patch1.patch",
 	"patch2.patch",
-	"patch3.patch",
 ]
-sha256 = [
-	"0z4b3j1r0v4zr3v1cpl1v56zx6w8nq1y3wbs8x1zg87pqyqykfs5",
+
+sha256sums = [
 	"fooooooooooooooooooooooooooooooooooooooooooooooooooo",
 	"baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaar",
 	"baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaz",
 ]
 
-[build]
+[options]
 strip = false
 static = false 
 parallel = true 
 
-prebuild = []
+[[features]]
+features = [
+	["foo", "--enable-foo"],
+	["bar", "--enable-bar"],
+	["baz", "--enable-baz"],
+]
 
+[extra]
 configure = [
 	"--prefix=usr",
 	"--exec-prefix=/usr",
 ]
-features = [] 
-
+prebuild = []
 postbuild = []
