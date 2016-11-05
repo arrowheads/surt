@@ -1,0 +1,50 @@
+meta:
+    name: foobar
+    version: 13.3.7
+    dependencies: x y z
+    replaces: barfoo
+
+source:
+    download:
+        - https://anexcellenturl.com/anexcellentprogram.tar.gz
+    localFiles:
+        - patch1.patch
+        - patch2.patch
+        - patch3.patch
+    sha256sums:
+        - fooooooooooooooooooooooooooooooooooooooooooooooooooo
+        - baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaar
+        - baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaz
+
+options:
+    stripBinaries: false
+    staticBinaries: true
+    parallelBuild: true
+
+features:
+    foo:
+        default: true
+        enableFlag: --enable-foo
+        disableFlag: --disable-foo
+        requires:
+            x:
+            - foo
+            - bar
+    bar:
+        default: false
+        enableFlag: --enable-bar
+        disableFlag: --disable-bar
+        requires:
+            y:
+            - baz
+            - quux
+
+extra:
+    configure: >
+        --prefix=/usr
+        --execprefix=/usr
+    preBuild: >
+        mkdir foo
+    postBuild: >
+        rm bar
+
