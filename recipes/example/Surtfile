@@ -1,5 +1,5 @@
 (define meta
-  '((name "foobar")
+  '((name "example")
     (version "13.3.7")
     (dependencies "x" "y" "z")
     (replaces "barfoo")))
@@ -24,9 +24,9 @@
 
 (define features
   '((foo (default #t)
-          (enable-flag "--enable-foo")
-          (disable-flag "--disable-foo")
-          (requires (Nothing)))
+         (enable-flag "--enable-foo")
+         (disable-flag "--disable-foo")
+         (requires (Nothing)))
     (bar (default #t)
          (enable-flag "--enable-bar")
          (disable-flag "--disable-bar")

@@ -2,6 +2,8 @@ surt
 ------------
 ### Package manager
 
-Currently in development, does nothing yet.
+This currently parses recipes.
 
-Examples of how recipes should look like are in `examples`.
+This depends on [monad-mandala](https://github.com/kori/monad-mandala)
+
+`recipes` contains examples of how recipes should look like.
